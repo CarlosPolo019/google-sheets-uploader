@@ -1,6 +1,6 @@
 {
   "name": "google-sheets-uploader",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A library for uploading data to Google Sheets from Excel or JSON.",
   "main": "index.js",
   "scripts": {
@@ -16,9 +16,13 @@
     "nodejs"
   ],
   "author": "Carlos Escorcia cmescorcia5@icloud.com",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "exceljs": "^4.4.0",
     "googleapis": "^144.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CarlosPolo019/google-sheets-uploader.git"
   }
 }
