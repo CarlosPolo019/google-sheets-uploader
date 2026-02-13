@@ -1,10 +1,11 @@
-name: CI
+name: CI & Publish
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -28,9 +29,9 @@ jobs:
   publish:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main'
     permissions:
-      contents: read
+      contents: write
       id-token: write
 
     steps:
@@ -44,3 +45,12 @@ jobs:
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          gh release create "v${VERSION}" \
+            --title "v${VERSION}" \
+            --notes-file CHANGELOG.md \
+            --latest
