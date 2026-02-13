@@ -1,30 +1,72 @@
 {
   "name": "google-sheets-uploader",
-  "version": "1.1.1",
-  "description": "A library for uploading data to Google Sheets from Excel or JSON.",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Professional-grade library for uploading, reading, and managing Google Sheets data. Supports Excel, CSV, JSON, and 2D arrays with retry logic, rate limiting, and batch operations.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "google",
+    "google-sheets",
     "sheets",
+    "spreadsheet",
     "excel",
+    "csv",
     "json",
     "uploader",
     "api",
-    "nodejs"
+    "nodejs",
+    "typescript",
+    "batch",
+    "read",
+    "write",
+    "append"
   ],
-  "author": "Carlos Escorcia cmescorcia5@icloud.com",
+  "author": "Carlos Escorcia <cmescorcia5@icloud.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "exceljs": "^4.4.0",
     "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/CarlosPolo019/google-sheets-uploader.git"
   },
-  "homepage": "https://carlosportafolio.vercel.app/"
-
+  "homepage": "https://www.cmescorcia.com"
 }
